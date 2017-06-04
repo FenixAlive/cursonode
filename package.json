@@ -1,0 +1,29 @@
+{
+  "name": "nodecurso",
+  "version": "1.0.0",
+  "description": "curso de node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FenixAlive/cursonode.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "curso"
+  ],
+  "author": "FenixAlive",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FenixAlive/cursonode/issues"
+  },
+  "homepage": "https://github.com/FenixAlive/cursonode#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jade": "^1.11.0",
+    "mongoose": "^4.10.4"
+  }
+}
