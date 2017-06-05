@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/FenixAlive/cursonode#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "jade": "^1.11.0",
     "mongoose": "^4.10.4"
