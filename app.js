@@ -31,7 +31,8 @@ app.post("/users", function(req, res){
       if(err){
       console.log(String(err));
       }
-  res.send("recibimos tus datos "+req.body.email)
+  res.send("recibimos tus datos "+req.body.username)
+  console.log(req.body.username);
   console.log(req.body.email);
   console.log(req.body.password);
       });
