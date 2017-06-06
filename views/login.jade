@@ -8,6 +8,9 @@ block content
     br
     form(action="/users", method="POST")
       div.form-group
+        label(for="username") Nombre de usuario
+        input.form-control#username(type="text" name="username" placeholder=" Nombre de usuario ")
+      div.form-group
         label(for="email") Email
         input.form-control#email(type="email" name="email" placeholder=" Email ")
       div.form-group
