@@ -6,14 +6,19 @@ block content
     h2 Por favor, ingresa tus datos para continuar
     br
     br
-    form(action="/sessions", method="POST")
-      
+    form(action="/users", method="POST")
+      div.form-group
+        label(for="username") Nombre de usuario
+        input.form-control#username(type="text" name="username" placeholder=" Nombre de usuario ")
       div.form-group
         label(for="email") Email
         input.form-control#email(type="email" name="email" placeholder=" Email ")
       div.form-group
         label(for="password") Contraseña
         input.form-control#password(type="password" name="password" placeholder=" Contraseña ")
+      div.form-group
+        label(for="confirmarpassword") Confirma tu Contraseña
+        input.form-control#confirmarpassword(type="password" name="confirmarpassword" placeholder=" Confirmar Contraseña ")
         div
         br
         br

@@ -17,25 +17,36 @@ app.get("/", function(req,res){
   res.render("index");
     });
 
-app.get("/login", function(req,res){
+app.get("/signup", function(req,res){
     User.find(function(err,doc){
     console.log(doc);
-    res.render("login");
+    res.render("signup");
         });
+    });
+
+app.get("/login", function(req,res){
+    res.render("login");
     });
 
 app.post("/users", function(req, res){
   var user = new User({username: req.body.username, email: req.body.email, password: req.body.password, confirmarpassword: req.body.confirmarpassword});
   console.log(user.confirmarpassword);
-  user.save(function(err){
-      if(err){
-      console.log(String(err));
-      }
+  user.save().then(function(usu){
   res.send("recibimos tus datos "+req.body.username)
-  console.log(req.body.username);
-  console.log(req.body.email);
-  console.log(req.body.password);
-      });
-    });
+  }), function(err){
+        if(err){
+        console.log(String(err));
+        };
+      };
+});
+
+app.post("/sessions", function(req,res){
+    User.findOne({email:req.body.email, password:req.body.password},"username email",function(err,docs){
+  console.log(docs);
+  res.send( "<br> Bienvenid@ "+docs.username + "<br><br> Tu email es: "+docs.email)
+
+        })
+
+    });    
 
 app.listen(8080);
