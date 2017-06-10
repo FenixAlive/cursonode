@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
-
+var session = require("express-session");
 
 app.set("view engine", "jade");
 
@@ -12,8 +12,14 @@ app.use("/public", express.static("public"));
 //manejar informacion que se recibe
 app.use(bodyParser.json());//para application.json
 app.use(bodyParser.urlencoded({extended:true})); //para informacion html
+app.use(session({
+  secret: "uc3ijf73jrbcx8w",
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.get("/", function(req,res){
+  console.log(req.session.user_id)
   res.render("index");
     });
 
@@ -41,9 +47,10 @@ app.post("/users", function(req, res){
 });
 
 app.post("/sessions", function(req,res){
-    User.findOne({email:req.body.email, password:req.body.password},"username email",function(err,docs){
+    User.findOne({email:req.body.email, password:req.body.password},"username email",function(err,user){
   console.log(docs);
-  res.send( "<br> Bienvenid@ "+docs.username + "<br><br> Tu email es: "+docs.email)
+  req.session.user_id = user._id
+  res.send( "<br> Bienvenid@ "+user.username + "<br><br> Tu email es: "+docs.email)
 
         })
 
