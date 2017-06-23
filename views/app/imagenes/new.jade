@@ -1,0 +1,24 @@
+extends ../../layout.jade
+block content
+  br
+  div.col-md-4
+  div.col-md-4
+    h2 Ingresa la nueva imagen:
+    br
+    br
+    form(action="/imagenes", method="POST")
+      
+      div.form-group
+        label(for="title") Titulo
+        input.form-control#title(type="text" name="title" placeholder=" Titulo de la imagen... ")
+      div.form-group
+        label(for="archivo") Imagen
+        input.form-control#archivo(type="file" name="archivo")
+        div
+        br
+        br
+        input.btn.btn-info(type="submit" value="Iniciar Sesión")
+        br
+        br
+        br
+  div.col-md-4

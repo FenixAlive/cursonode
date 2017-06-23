@@ -1,7 +1,7 @@
 html, body{
   width:100%;
-  background: url("../img/wall.jpg");
-  background-size: cover;
+  background: url("../img/wall.png");
+  /*background-size: cover;*/
   background-attachment: fixed;
   background-position: center 0;
   background-repeat: repeat;

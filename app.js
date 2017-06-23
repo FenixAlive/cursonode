@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
 var session = require("express-session");
+var router_app = require("./routes_app")
+var session_middleware = require("./middlewares/session")
 
 app.set("view engine", "jade");
 
@@ -47,13 +49,12 @@ app.post("/users", function(req, res){
 });
 
 app.post("/sessions", function(req,res){
-    User.findOne({email:req.body.email, password:req.body.password},"username email",function(err,user){
-  console.log(docs);
-  req.session.user_id = user._id
-  res.send( "<br> Bienvenid@ "+user.username + "<br><br> Tu email es: "+docs.email)
-
+    User.findOne({email:req.body.email, password:req.body.password},function(err,user){
+  req.session.user_id = user._id;
+  res.redirect("/app");
         })
-
     });    
+app.use("/app",session_middleware);
+app.use("/app",router_app);
 
 app.listen(8080);
