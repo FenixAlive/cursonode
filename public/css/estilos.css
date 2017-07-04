@@ -7,4 +7,32 @@ html, body{
   background-repeat: repeat;
   text-shadow: 5px 5px 5px #fff;
 }
+.center{
+text-align: center;
+}
 a{text-shadow: none;}
+
+.columna{
+display:inline-block;
+}
+nav .blank{
+background-color: #222 !important;
+color:white;
+z-index:10;
+font-size: 1em;
+}
+.boton{
+  text-align: center;
+  margin:10px 20px;
+  display:inline-block;
+}
+.forma{
+display: inline-block;
+}
+.boton a{
+color:#fff;
+}
+.tr:nth-of-type(odd){
+  background-color: #eee;
+}
+

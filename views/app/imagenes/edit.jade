@@ -6,18 +6,17 @@ block content
     h2 Ingresa la nueva imagen:
     br
     br
-    form(action="/app/imagenes", method="POST")
-      
+    form(action="/app/imagenes/#{imagen.id}?_method=PUT" method="POST")
       div.form-group
         label(for="title") Titulo
-        input.form-control#title(type="text" name="title" placeholder=" Titulo de la imagen... ")
+        input.form-control#title(type="text" name="title" placeholder=" Titulo de la imagen... " value="#{imagen.title}")
       div.form-group
         label(for="archivo") Imagen
         input.form-control#archivo(type="file" name="archivo")
         div
         br
         br
-        input.btn.btn-info(type="submit" value="Enviar")
+        input.btn.btn-info(type="submit" value="Guardar cambios")
         br
         br
         br

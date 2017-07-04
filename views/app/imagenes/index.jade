@@ -1,0 +1,21 @@
+extends ../../layout.jade
+block content
+  br
+  div.col-md-12
+    div.center 
+      h1 Imagenes
+    br 
+    br
+  div.row
+    div.col-sm-6.col-md-4.col-lg-3.columna  
+      for imagen in imagenes
+        div.thumbnail.tr
+          a(href="#")
+            img(src="#" alt="imagen" style="width:100%")
+            div.caption
+              p=imagen.title
+              div.btn.btn-primary.boton
+                a(href="/app/imagenes/#{imagen._id}/edit") Editar
+              div.forma
+                form.forma(method="POST" action="/app/imagenes/#{imagen._id}?_method=DELETE")
+                  input.btn.btn-danger.boton(type="submit" value="Eliminar")

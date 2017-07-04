@@ -1,0 +1,13 @@
+extends ../../layout.jade
+block content
+  br
+  div.col-md-4
+  div.col-md-4
+    br
+    h1= imagen.title 
+    br
+    if(typeof imagen.creator != "undefined")
+      p Por #{imagen.creator.email}
+    br
+  div.col-md-4
+    br

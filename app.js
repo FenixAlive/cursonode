@@ -2,9 +2,10 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
-var session = require("express-session");
+var cookieSession = require("cookie-session");
 var router_app = require("./routes_app")
 var session_middleware = require("./middlewares/session")
+var methodOverride = require("method-override")
 
 app.set("view engine", "jade");
 
@@ -14,11 +15,12 @@ app.use("/public", express.static("public"));
 //manejar informacion que se recibe
 app.use(bodyParser.json());//para application.json
 app.use(bodyParser.urlencoded({extended:true})); //para informacion html
-app.use(session({
-  secret: "uc3ijf73jrbcx8w",
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(cookieSession({
+  name: "session",
+  keys: ["llave-1","llave-2"]
+      }));
+//para manejar put y delete
+app.use(methodOverride("_method"))
 
 app.get("/", function(req,res){
   console.log(req.session.user_id)
@@ -41,6 +43,7 @@ app.post("/users", function(req, res){
   console.log(user.confirmarpassword);
   user.save().then(function(usu){
   res.send("recibimos tus datos "+req.body.username)
+  res.send("<br><a href='/login'>Entrar a tu cuenta</a>")
   }), function(err){
         if(err){
         console.log(String(err));
@@ -50,8 +53,20 @@ app.post("/users", function(req, res){
 
 app.post("/sessions", function(req,res){
     User.findOne({email:req.body.email, password:req.body.password},function(err,user){
-  req.session.user_id = user._id;
-  res.redirect("/app");
+        try{
+        if(user._id){
+          req.session.user_id = user._id;
+          res.redirect("/app");
+          }else{
+          res.redirect("/login");
+          }
+        }catch(err){
+          res.send("hay un error, revisa nuevamente la información ingresada porfavor.");
+          console.log(err);
+        }
+  if(err){
+  console.log(err);
+  }
         })
     });    
 app.use("/app",session_middleware);
