@@ -6,6 +6,7 @@ html(lang="es")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     link(rel="stylesheet" href="/public/css/estilos.css")
+    script(src="/socket.io/socket.io.js")
   body
     div.container
       div.row
@@ -15,7 +16,11 @@ html(lang="es")
             ul.nav.navbar-nav
               li
                 a(href="/app") Inicio
+              li
+                a(href="/app/imagenes/new") Subir Imagen
               li 
                 a(href="/app/imagenes") Mis imagenes
+              li 
+                a(href="/") Salir
       div.row
         block content

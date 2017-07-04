@@ -4,3 +4,11 @@ block content
     div.row
       div.col-xs-12.text-center
         h1 Hola #{user.username}
+    div.row
+      for imagen in imagenes
+        div.col-sm-6.img-container
+          h3= imagen.title
+          img.main-img(src="public/imagenes/#{imagen._id}.#{imagen.extension}")
+          if(typeof imagen.creator != "undefined")
+            p Por #{imagen.creator.email}
+  script(src="/public/js/client.js")

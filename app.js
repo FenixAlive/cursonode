@@ -2,10 +2,23 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var User = require("./models/user").User;
-var cookieSession = require("cookie-session");
+var session = require("express-session");
 var router_app = require("./routes_app")
 var session_middleware = require("./middlewares/session")
 var methodOverride = require("method-override")
+var formidable = require("express-form-data");
+var RedisStore = require("connect-redis")(session);
+var http = require("http");
+var server = http.Server(app);
+var realtime = require("./realtime");
+
+var sessionMiddleware = session({
+    store: new RedisStore({//irian el puerto y la configuracion
+    }),
+    secret: "mainSecretWordFenixAlive"    
+});
+
+realtime(server,sessionMiddleware);
 
 app.set("view engine", "jade");
 
@@ -15,12 +28,13 @@ app.use("/public", express.static("public"));
 //manejar informacion que se recibe
 app.use(bodyParser.json());//para application.json
 app.use(bodyParser.urlencoded({extended:true})); //para informacion html
-app.use(cookieSession({
-  name: "session",
-  keys: ["llave-1","llave-2"]
-      }));
+
+
+app.use(sessionMiddleware);
 //para manejar put y delete
 app.use(methodOverride("_method"))
+
+app.use(formidable.parse({keepExtensions: true}));
 
 app.get("/", function(req,res){
   console.log(req.session.user_id)
@@ -72,4 +86,4 @@ app.post("/sessions", function(req,res){
 app.use("/app",session_middleware);
 app.use("/app",router_app);
 
-app.listen(8080);
+server.listen(8080);

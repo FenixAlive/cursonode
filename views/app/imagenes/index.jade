@@ -11,7 +11,7 @@ block content
       for imagen in imagenes
         div.thumbnail.tr
           a(href="#")
-            img(src="#" alt="imagen" style="width:100%")
+            img(src="/public/imagenes/#{imagen._id}.#{imagen.extension}" alt="imagen" style="width:100%")
             div.caption
               p=imagen.title
               div.btn.btn-primary.boton

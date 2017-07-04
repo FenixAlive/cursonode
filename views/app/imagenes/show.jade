@@ -4,10 +4,12 @@ block content
   div.col-md-4
   div.col-md-4
     br
-    h1= imagen.title 
-    br
-    if(typeof imagen.creator != "undefined")
-      p Por #{imagen.creator.email}
-    br
+    div.img-container
+      h1= imagen.title 
+      img.main-img(src="/public/imagenes/#{imagen._id}.#{imagen.extension}")
+      br
+      if(typeof imagen.creator != "undefined")
+        p Por #{imagen.creator.email}
+     br
   div.col-md-4
     br
